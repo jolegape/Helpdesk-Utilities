@@ -1,9 +1,9 @@
 
 # Helpdesk-Utilities
 Helpdesk Utilities is a collection of python scripts used to automate data syncing and sharing between Active Directory/LDAP, [osTicket](https://osticket.com/), and [Snipe-IT](https://snipeitapp.com/). While Snipe-IT and osTicket both have native LDAP support, I use this to better format the data in a way that suits my environment. E.g. In osTicket, I like the name of the user in the ticket to display as First Last (EMPLOYEEID) (YEAR), where YEAR = the student year level (if a student), or STAFF if a staff member.
-```
+
 ![Alt text](/Screenshots/TicketNameExample.png?raw=true "osTicket Name Example")
-```
+
 Long term this will be turned into a docker app, hence the use of a .env file at the moment. 
 
 ## Getting Started
@@ -60,50 +60,47 @@ First, [create a list](https://docs.osticket.com/en/latest/Admin/Manage/Lists.ht
 | Service Tag  | Short Answer | Required, Immutable           | serviceTag   |
 | Asset Number | Short Answer | Required                      | assetNumber  |
 | Type         | Short Answer | Internal, Optional            | itemType     |
-```
+
 ![Alt text](/Screenshots/ListDefinition.png?raw=true "osTicket List Definition")
-```
-```
+
 ![Alt text](/Screenshots/ListProperties.png?raw=true "osTicket List Properties")
-```
+
 Once this has been completed, go into the list and use the id value in the URL to update line 23. In my case, the asset list had an ID of 3. 
-```
+
 ![Alt text](/Screenshots/ListID.png?raw=true "osTicket List ID")
-```
+
 Go to the List Properties tab, and hover over the Config button for each property. Use the number at the end of the displayed URL to update the relevant property for lines 25-31.
-```
+
 ![Alt text](/Screenshots/ListPropertiesID.png?raw=true "osTicket List Properties ID")
-```
+
 
 Once the configuration is completed you should be able to run `python syncDevices.py` or `python syncUsers.py` . If all is correct you should see users appear in Snipe-IT and osTicket, and devices populate the osTicket list that you created.
 **Snipe-IT Users**
-```
+
 ![Alt text](/Screenshots/Snipe-ITUsers.png?raw=true "Snipe-IT Users")
-```
+
 **osTicket Users**
-```
+
 ![Alt text](/Screenshots/osTicketUsers.png?raw=true "osTicket Users")
-```
+
 **osTicket Devices**
-```
+
 ![Alt text](/Screenshots/ListItems.png?raw=true "osTicket List Items")
-```
+
 To use the lists in a helpdesk ticket, create a form with a field targeting the Asset list. In the following example I target the same list twice. Once to record the asset being repaired, and the second time to record the replacement asset handed to the user. 
-```
+
 ![Alt text](/Screenshots/FormFieldsExample.png?raw=true "osTicket Form Fields")
-```
+
 For both fields I set the widget to TypeAhead. This allows me to enter or scan are barcode and have it search, rather than displaying a list with 1000's of devices.
-```
+
 ![Alt text](/Screenshots/FormFieldsSetup.png?raw=true "Form Fields Setup")
-```
-```
+
 ![Alt text](/Screenshots/FormFieldsSettings.png?raw=true "Form Fields Settings")
-```
 
 Once this is done, you should be able to target devices when creating a ticket.
-```
+
 ![Alt text](/Screenshots/NewTicketExample.png?raw=true "New Ticket Example")
-```
+
 
 
 ## Acknowledgements
